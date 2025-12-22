@@ -58,7 +58,7 @@ export const PASSENGER_SELECTORS = {
     PASSENGER_REMOVE_ROW: 'app-passenger-input p-panel a.fa-remove',
     PASSENGER_INPUT_COMPONENT: 'app-passenger-input',
     PASSENGER_NAME_INPUT: 'p-autocomplete input',
-    PASSENGER_NAME_LIST: '.ui-autocomplete-items li',
+    PASSENGER_NAME_LIST: '.ui-autocomplete-items li, .ui-autocomplete-panel li',
     PASSENGER_AGE_INPUT: 'input[formcontrolname="passengerAge"]',
     PASSENGER_GENDER_INPUT: 'select[formcontrolname="passengerGender"]',
     PASSENGER_BERTH_CHOICE: 'select[formcontrolname="passengerBerthChoice"]',
