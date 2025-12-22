@@ -6,8 +6,7 @@ import logger from './logger';
 async function handleCaptchaAndContinue() {
     await waitForElementToAppear(REVIEW_SELECTORS.REVIEW_CAPTCHA_IMAGE);
     // Find the captcha input element - try multiple selectors
-    var captchaInput = document.getElementById(REVIEW_SELECTORS.REVIEW_CAPTCHA_INPUT) || 
-                      document.querySelector(REVIEW_SELECTORS.REVIEW_CAPTCHA_INPUT);
+    var captchaInput = document.querySelector(REVIEW_SELECTORS.REVIEW_CAPTCHA_INPUT);
   
     // Scroll the captcha input field into view smoothly
     if (captchaInput) {
