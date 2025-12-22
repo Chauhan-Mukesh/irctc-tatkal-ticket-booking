@@ -124,8 +124,7 @@ async function findRootTrain() {
     return false; // Indicate that the ticket selection failed
   }
   // Create a new MutationObserver
-  // eslint-disable-next-line no-unused-vars
-  const observer = new MutationObserver((mutationsList, observer) => {
+  const observer = new MutationObserver((mutationsList) => {
     // Check if any mutations occurred
     for (let mutation of mutationsList) {
       // Check if nodes were added 

@@ -6,13 +6,18 @@ import logger from './logger';
 import { username, password } from './storage';
 
 async function fillLoginCaptcha() {
-    // Find the captcha input element
+    // Find the captcha input element - try multiple selectors
     var captchaInput = document.querySelector(LOGIN_SELECTORS.LOGIN_CAPTCHA_INPUT);
   
     // Scroll the captcha input field into view smoothly
     if (captchaInput) {
       await scrollToElement(captchaInput);
+    } else {
+      logger.error('Captcha input field not found');
+      alert('Captcha input field not found. Please refresh the page or contact support.');
+      throw new Error('Captcha input field not found');
     }
+    
     var captchaValue = prompt('Please enter the Captcha:');
   
     // Fill the captcha input field with the provided value
@@ -27,22 +32,37 @@ async function login() {
     let loginButton = document.querySelector(LOGIN_SELECTORS.LOGIN_BUTTON);
     if(loginButton){
       await loginButton.click();
+      await delay(500); // Give time for modal to appear
     }
     await waitForElementToAppear(LOGIN_SELECTORS.LOGIN_COMPONENT);
     await waitForElementToAppear(LOGIN_SELECTORS.LOGIN_CAPTCHA_IMAGE);
   
     let loginModal = document.querySelector(LOGIN_SELECTORS.LOGIN_COMPONENT);
   
-    if (!loginModal) return;
+    if (!loginModal) {
+      logger.error('Login modal not found');
+      throw new Error('Login modal not found');
+    }
   
     const usernameInput = loginModal.querySelector(LOGIN_SELECTORS.LOGIN_USERID);
     const passwordInput = loginModal.querySelector(LOGIN_SELECTORS.LOGIN_PASSWORD);
+    
+    if (!usernameInput || !passwordInput) {
+      logger.error('Username or password input field not found');
+      throw new Error('Username or password input field not found');
+    }
+    
     await simulateTyping(usernameInput, username);
     await simulateTyping(passwordInput, password);
     if(username && password){
       await fillLoginCaptcha();
       const signInButton = loginModal.querySelector('button[type="submit"]');
-      await signInButton.click();
+      if (signInButton) {
+        await signInButton.click();
+      } else {
+        logger.error('Sign in button not found');
+        throw new Error('Sign in button not found');
+      }
     }
   }
 
@@ -57,8 +77,7 @@ async function waitForAppLoginToDisappear() {
     }
   
     // Create a promise to track the disappearance of the app-login element
-    // eslint-disable-next-line no-unused-vars
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       // Create a mutation observer to watch for changes in the DOM
       const observer = new MutationObserver((mutationsList, observer) => {
         // Check if the app-login element is still in the DOM

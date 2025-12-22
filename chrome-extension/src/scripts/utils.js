@@ -26,11 +26,25 @@ export async function simulateTyping(element, text) {
     }
 }
 
-export function waitForElementToAppear(selector) {
-    return new Promise((resolve) => {
+export function waitForElementToAppear(selector, timeout = 30000) {
+    return new Promise((resolve, reject) => {
+        // First check if element already exists
+        const existingElement = document.querySelector(selector);
+        if (existingElement) {
+            resolve(existingElement);
+            return;
+        }
+        
+        // Set up timeout
+        const timeoutId = setTimeout(() => {
+            observer.disconnect();
+            reject(new Error(`Timeout waiting for element: ${selector}`));
+        }, timeout);
+        
         const observer = new MutationObserver((mutationsList, observer) => {
             const element = document.querySelector(selector);
             if (element) {
+                clearTimeout(timeoutId);
                 observer.disconnect();
                 resolve(element);
             }

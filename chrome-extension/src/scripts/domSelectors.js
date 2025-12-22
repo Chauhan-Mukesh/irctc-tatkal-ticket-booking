@@ -15,14 +15,14 @@ export const LOGIN_SELECTORS = {
 // Search Journey Elements
 export const JOURNEY_SELECTORS = {
     JOURNEY_INPUT_COMPONENT: 'app-jp-input',
-    ORIGIN_STATION_CODE: '#origin input',
-    DESTINATION_STATION_CODE: '#destination input',
-    STATION_CODE_LIST: '.ui-autocomplete-items li',
-    JOURNEY_QUOTA: '#journeyQuota>div',
-    JOURNEY_QUOTA_LIST: '#journeyQuota p-dropdownitem span',
-    JOURNEY_DATE: '#jDate input',
-    CURRENT_TIME: 'app-header .h_head1>span strong',
-    JOURNEY_SEARCH_BUTTON: 'button[type="submit"][label="Find Trains"].search_btn.train_Search',
+    ORIGIN_STATION_CODE: '#origin input, p-autocomplete[formcontrolname="origin"] input',
+    DESTINATION_STATION_CODE: '#destination input, p-autocomplete[formcontrolname="destination"] input',
+    STATION_CODE_LIST: '.ui-autocomplete-items li, .ui-autocomplete-panel li',
+    JOURNEY_QUOTA: '#journeyQuota>div, p-dropdown[formcontrolname="journeyQuota"] .ui-dropdown',
+    JOURNEY_QUOTA_LIST: '#journeyQuota p-dropdownitem span, p-dropdown[formcontrolname="journeyQuota"] .ui-dropdown-item span',
+    JOURNEY_DATE: '#jDate input, p-calendar[formcontrolname="journeyDate"] input',
+    CURRENT_TIME: 'app-header .h_head1>span strong, app-header .h_head1 strong',
+    JOURNEY_SEARCH_BUTTON: 'button[type="submit"][label="Find Trains"].search_btn.train_Search, button[type="submit"].search_btn.train_Search',
 };
 
 // Modify Search Train Elements
@@ -58,7 +58,7 @@ export const PASSENGER_SELECTORS = {
     PASSENGER_REMOVE_ROW: 'app-passenger-input p-panel a.fa-remove',
     PASSENGER_INPUT_COMPONENT: 'app-passenger-input',
     PASSENGER_NAME_INPUT: 'p-autocomplete input',
-    PASSENGER_NAME_LIST: '.ui-autocomplete-items li',
+    PASSENGER_NAME_LIST: '.ui-autocomplete-items li, .ui-autocomplete-panel li',
     PASSENGER_AGE_INPUT: 'input[formcontrolname="passengerAge"]',
     PASSENGER_GENDER_INPUT: 'select[formcontrolname="passengerGender"]',
     PASSENGER_BERTH_CHOICE: 'select[formcontrolname="passengerBerthChoice"]',
