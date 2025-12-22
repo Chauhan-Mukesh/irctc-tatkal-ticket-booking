@@ -45,7 +45,14 @@ Initial assumptions about adding generic fallback selectors were incorrect and h
 
 **Note**: Train selection is a dedicated page with proper Angular components. Generic class fallbacks were removed as they could match elements on wrong pages.
 
-### 4. Review and Captcha Elements
+### 4. Passenger Input Elements
+**Updated Selectors:**
+- Passenger name list: `.ui-autocomplete-items li, .ui-autocomplete-panel li` (added Angular fallback)
+- Other passenger selectors remain unchanged
+
+**Note**: Added `.ui-autocomplete-panel li` fallback to match the pattern used for station autocomplete, as both use p-autocomplete components.
+
+### 5. Review and Captcha Elements
 **Current Selectors:**
 - Review component: `app-review-booking` (unchanged)
 - Captcha image: `app-captcha .captcha-img` (unchanged)
