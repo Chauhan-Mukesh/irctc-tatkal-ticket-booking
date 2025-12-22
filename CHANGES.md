@@ -99,7 +99,7 @@ Initial assumptions about adding generic fallback selectors were incorrect and h
 ### 4. Captcha Handling
 - Multiple selector attempts for finding captcha input
 - Better error messages if captcha field is not found
-- Uses both `getElementById` and `querySelector` for maximum compatibility
+- Uses `querySelector` with multiple CSS selectors for maximum compatibility
 
 ### 5. Login Flow
 - Added delay after clicking login button

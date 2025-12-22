@@ -13,8 +13,9 @@ async function fillLoginCaptcha() {
     if (captchaInput) {
       await scrollToElement(captchaInput);
     } else {
-      logger.warn('Captcha input field not found');
-      return;
+      logger.error('Captcha input field not found');
+      alert('Captcha input field not found. Please refresh the page or contact support.');
+      throw new Error('Captcha input field not found');
     }
     
     var captchaValue = prompt('Please enter the Captcha:');
@@ -39,8 +40,8 @@ async function login() {
     let loginModal = document.querySelector(LOGIN_SELECTORS.LOGIN_COMPONENT);
   
     if (!loginModal) {
-      logger.warn('Login modal not found');
-      return;
+      logger.error('Login modal not found');
+      throw new Error('Login modal not found');
     }
   
     const usernameInput = loginModal.querySelector(LOGIN_SELECTORS.LOGIN_USERID);
@@ -48,7 +49,7 @@ async function login() {
     
     if (!usernameInput || !passwordInput) {
       logger.error('Username or password input field not found');
-      return;
+      throw new Error('Username or password input field not found');
     }
     
     await simulateTyping(usernameInput, username);
@@ -60,6 +61,7 @@ async function login() {
         await signInButton.click();
       } else {
         logger.error('Sign in button not found');
+        throw new Error('Sign in button not found');
       }
     }
   }
