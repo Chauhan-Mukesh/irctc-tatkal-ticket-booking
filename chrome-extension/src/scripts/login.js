@@ -75,8 +75,7 @@ async function waitForAppLoginToDisappear() {
     }
   
     // Create a promise to track the disappearance of the app-login element
-    // eslint-disable-next-line no-unused-vars
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       // Create a mutation observer to watch for changes in the DOM
       const observer = new MutationObserver((mutationsList, observer) => {
         // Check if the app-login element is still in the DOM
