@@ -4,17 +4,17 @@ export const APP_HEADER = 'app-header';
 
 // Login Elements
 export const LOGIN_SELECTORS = {
-    LOGIN_BUTTON: 'app-header a.loginText, button.search_btn.train_Search',
-    LOGIN_COMPONENT: 'app-login, app-jp-input',
-    LOGIN_USERID: 'input[formcontrolname="userid"], input[formcontrolname="userName"]',
+    LOGIN_BUTTON: 'app-header a.loginText',
+    LOGIN_COMPONENT: 'app-login',
+    LOGIN_USERID: 'input[formcontrolname="userid"]',
     LOGIN_PASSWORD: 'input[formcontrolname="password"]',
-    LOGIN_CAPTCHA_IMAGE: 'app-captcha .captcha-img, .captcha-img',
-    LOGIN_CAPTCHA_INPUT: 'app-captcha #captcha, #captcha, input[formcontrolname="captcha"]',
+    LOGIN_CAPTCHA_IMAGE: 'app-captcha .captcha-img',
+    LOGIN_CAPTCHA_INPUT: 'app-captcha #captcha',
 };
 
 // Search Journey Elements
 export const JOURNEY_SELECTORS = {
-    JOURNEY_INPUT_COMPONENT: 'app-jp-input, .level_1_1.col-xs-12.remove-padding.jp-form',
+    JOURNEY_INPUT_COMPONENT: 'app-jp-input',
     ORIGIN_STATION_CODE: '#origin input, p-autocomplete[formcontrolname="origin"] input',
     DESTINATION_STATION_CODE: '#destination input, p-autocomplete[formcontrolname="destination"] input',
     STATION_CODE_LIST: '.ui-autocomplete-items li, .ui-autocomplete-panel li',
@@ -33,14 +33,14 @@ export const MODIFY_SEARCH_SELECTORS = {
 
 // Train List Elements
 export const TRAIN_LIST_SELECTORS = {
-    TRAIN_LIST_COMPONENT: 'app-train-list, .col-sm-9.col-xs-12',
+    TRAIN_LIST_COMPONENT: 'app-train-list',
     TRAIN_COMPONENT: 'app-train-avl-enq',
-    FIND_TRAIN_NUMBER: 'app-train-avl-enq .train-heading, .train-heading strong',
+    FIND_TRAIN_NUMBER: 'app-train-avl-enq .train-heading',
     AVAILABLE_CLASS: '.pre-avl',
-    SELECTED_CLASS_TAB: 'p-tabmenu li[role="tab"][aria-selected="true"][aria-expanded="true"] a>div, .pre-avl',
+    SELECTED_CLASS_TAB: 'p-tabmenu li[role="tab"][aria-selected="true"][aria-expanded="true"] a>div',
     BOOK_NOW_BUTTON: 'button.btnDefault.train_Search',
     BUTTON_DISABLE_CLASS: 'disable-book',
-    LINK_INSERTED: '.link.ng-star-inserted, .link',
+    LINK_INSERTED: '.link.ng-star-inserted',
 };
 
 // Popup Elements
@@ -74,11 +74,11 @@ export const PASSENGER_SELECTORS = {
 export const REVIEW_SELECTORS = {
     REVIEW_COMPONENT: 'app-review-booking',
     REVIEW_TRAIN_HEADER: 'app-train-header',
-    REVIEW_CAPTCHA_IMAGE: 'app-captcha .captcha-img, .captcha-img',
-    REVIEW_CAPTCHA_INPUT: 'captcha, #captcha, input[formcontrolname="captcha"]',
+    REVIEW_CAPTCHA_IMAGE: 'app-captcha .captcha-img',
+    REVIEW_CAPTCHA_INPUT: 'captcha',
     REVIEW_AVAILABLE: '.AVAILABLE',
     REVIEW_WAITING: '.WL',
-    REVIEW_SUBMIT_BUTTON: 'app-review-booking button.btnDefault.train_Search, button.btnDefault.train_Search',
+    REVIEW_SUBMIT_BUTTON: 'app-review-booking button.btnDefault.train_Search',
 };
 
 // Payment Details Elements

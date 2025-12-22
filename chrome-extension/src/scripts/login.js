@@ -31,7 +31,7 @@ async function login() {
     let loginButton = document.querySelector(LOGIN_SELECTORS.LOGIN_BUTTON);
     if(loginButton){
       await loginButton.click();
-      await delay(500); // Give time for modal/form to appear
+      await delay(500); // Give time for modal to appear
     }
     await waitForElementToAppear(LOGIN_SELECTORS.LOGIN_COMPONENT);
     await waitForElementToAppear(LOGIN_SELECTORS.LOGIN_CAPTCHA_IMAGE);
@@ -39,7 +39,7 @@ async function login() {
     let loginModal = document.querySelector(LOGIN_SELECTORS.LOGIN_COMPONENT);
   
     if (!loginModal) {
-      logger.warn('Login modal/component not found');
+      logger.warn('Login modal not found');
       return;
     }
   
