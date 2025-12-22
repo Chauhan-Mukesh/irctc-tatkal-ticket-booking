@@ -4,25 +4,25 @@ export const APP_HEADER = 'app-header';
 
 // Login Elements
 export const LOGIN_SELECTORS = {
-    LOGIN_BUTTON: 'app-header a.loginText',
-    LOGIN_COMPONENT: 'app-login',
-    LOGIN_USERID: 'input[formcontrolname="userid"]',
+    LOGIN_BUTTON: 'app-header a.loginText, button.search_btn.train_Search',
+    LOGIN_COMPONENT: 'app-login, app-jp-input',
+    LOGIN_USERID: 'input[formcontrolname="userid"], input[formcontrolname="userName"]',
     LOGIN_PASSWORD: 'input[formcontrolname="password"]',
-    LOGIN_CAPTCHA_IMAGE: 'app-captcha .captcha-img',
-    LOGIN_CAPTCHA_INPUT: 'app-captcha #captcha',
+    LOGIN_CAPTCHA_IMAGE: 'app-captcha .captcha-img, .captcha-img',
+    LOGIN_CAPTCHA_INPUT: 'app-captcha #captcha, #captcha, input[formcontrolname="captcha"]',
 };
 
 // Search Journey Elements
 export const JOURNEY_SELECTORS = {
-    JOURNEY_INPUT_COMPONENT: 'app-jp-input',
-    ORIGIN_STATION_CODE: '#origin input',
-    DESTINATION_STATION_CODE: '#destination input',
-    STATION_CODE_LIST: '.ui-autocomplete-items li',
-    JOURNEY_QUOTA: '#journeyQuota>div',
-    JOURNEY_QUOTA_LIST: '#journeyQuota p-dropdownitem span',
-    JOURNEY_DATE: '#jDate input',
-    CURRENT_TIME: 'app-header .h_head1>span strong',
-    JOURNEY_SEARCH_BUTTON: 'button[type="submit"][label="Find Trains"].search_btn.train_Search',
+    JOURNEY_INPUT_COMPONENT: 'app-jp-input, .level_1_1.col-xs-12.remove-padding.jp-form',
+    ORIGIN_STATION_CODE: '#origin input, p-autocomplete[formcontrolname="origin"] input',
+    DESTINATION_STATION_CODE: '#destination input, p-autocomplete[formcontrolname="destination"] input',
+    STATION_CODE_LIST: '.ui-autocomplete-items li, .ui-autocomplete-panel li',
+    JOURNEY_QUOTA: '#journeyQuota>div, p-dropdown[formcontrolname="journeyQuota"] .ui-dropdown',
+    JOURNEY_QUOTA_LIST: '#journeyQuota p-dropdownitem span, p-dropdown[formcontrolname="journeyQuota"] .ui-dropdown-item span',
+    JOURNEY_DATE: '#jDate input, p-calendar[formcontrolname="journeyDate"] input',
+    CURRENT_TIME: 'app-header .h_head1>span strong, app-header .h_head1 strong',
+    JOURNEY_SEARCH_BUTTON: 'button[type="submit"][label="Find Trains"].search_btn.train_Search, button[type="submit"].search_btn.train_Search',
 };
 
 // Modify Search Train Elements
@@ -33,14 +33,14 @@ export const MODIFY_SEARCH_SELECTORS = {
 
 // Train List Elements
 export const TRAIN_LIST_SELECTORS = {
-    TRAIN_LIST_COMPONENT: 'app-train-list',
+    TRAIN_LIST_COMPONENT: 'app-train-list, .col-sm-9.col-xs-12',
     TRAIN_COMPONENT: 'app-train-avl-enq',
-    FIND_TRAIN_NUMBER: 'app-train-avl-enq .train-heading',
+    FIND_TRAIN_NUMBER: 'app-train-avl-enq .train-heading, .train-heading strong',
     AVAILABLE_CLASS: '.pre-avl',
-    SELECTED_CLASS_TAB: 'p-tabmenu li[role="tab"][aria-selected="true"][aria-expanded="true"] a>div',
+    SELECTED_CLASS_TAB: 'p-tabmenu li[role="tab"][aria-selected="true"][aria-expanded="true"] a>div, .pre-avl',
     BOOK_NOW_BUTTON: 'button.btnDefault.train_Search',
     BUTTON_DISABLE_CLASS: 'disable-book',
-    LINK_INSERTED: '.link.ng-star-inserted',
+    LINK_INSERTED: '.link.ng-star-inserted, .link',
 };
 
 // Popup Elements
@@ -74,11 +74,11 @@ export const PASSENGER_SELECTORS = {
 export const REVIEW_SELECTORS = {
     REVIEW_COMPONENT: 'app-review-booking',
     REVIEW_TRAIN_HEADER: 'app-train-header',
-    REVIEW_CAPTCHA_IMAGE: 'app-captcha .captcha-img',
-    REVIEW_CAPTCHA_INPUT: 'captcha',
+    REVIEW_CAPTCHA_IMAGE: 'app-captcha .captcha-img, .captcha-img',
+    REVIEW_CAPTCHA_INPUT: 'captcha, #captcha, input[formcontrolname="captcha"]',
     REVIEW_AVAILABLE: '.AVAILABLE',
     REVIEW_WAITING: '.WL',
-    REVIEW_SUBMIT_BUTTON: 'app-review-booking button.btnDefault.train_Search',
+    REVIEW_SUBMIT_BUTTON: 'app-review-booking button.btnDefault.train_Search, button.btnDefault.train_Search',
 };
 
 // Payment Details Elements

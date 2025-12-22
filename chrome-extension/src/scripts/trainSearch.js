@@ -25,9 +25,12 @@ async function autoComplete(element, value) {
   // Wait for a short delay to ensure the options are generated
   await delay(600);
 
+  // Try multiple selectors for the station list
   var firstItem = document.querySelector(JOURNEY_SELECTORS.STATION_CODE_LIST);
   if (firstItem) {
     await firstItem.click();
+  } else {
+    logger.warn('No station code list item found for value:', value);
   }
 }
 async function typeDate(element, mydate) {
@@ -72,9 +75,9 @@ async function selectQuota(element,value) {
 
    element.dispatchEvent(inputEvent);
 
-   delay(500);
+   await delay(500);
 
-  // Get all list items within the autocomplete dropdown
+  // Get all list items within the autocomplete dropdown - try multiple selectors
   var listItems = document.querySelectorAll(JOURNEY_SELECTORS.JOURNEY_QUOTA_LIST);
 
   // Loop through each list item
@@ -86,6 +89,7 @@ async function selectQuota(element,value) {
     if (itemText.toLowerCase().includes(value.toLowerCase())) {
       // Select the list item by simulating a click
       item.click();
+      logger.info('Selected quota:', itemText);
       break;
     }
   }

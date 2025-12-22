@@ -6,13 +6,17 @@ import logger from './logger';
 import { username, password } from './storage';
 
 async function fillLoginCaptcha() {
-    // Find the captcha input element
+    // Find the captcha input element - try multiple selectors
     var captchaInput = document.querySelector(LOGIN_SELECTORS.LOGIN_CAPTCHA_INPUT);
   
     // Scroll the captcha input field into view smoothly
     if (captchaInput) {
       await scrollToElement(captchaInput);
+    } else {
+      logger.warn('Captcha input field not found');
+      return;
     }
+    
     var captchaValue = prompt('Please enter the Captcha:');
   
     // Fill the captcha input field with the provided value
@@ -27,22 +31,36 @@ async function login() {
     let loginButton = document.querySelector(LOGIN_SELECTORS.LOGIN_BUTTON);
     if(loginButton){
       await loginButton.click();
+      await delay(500); // Give time for modal/form to appear
     }
     await waitForElementToAppear(LOGIN_SELECTORS.LOGIN_COMPONENT);
     await waitForElementToAppear(LOGIN_SELECTORS.LOGIN_CAPTCHA_IMAGE);
   
     let loginModal = document.querySelector(LOGIN_SELECTORS.LOGIN_COMPONENT);
   
-    if (!loginModal) return;
+    if (!loginModal) {
+      logger.warn('Login modal/component not found');
+      return;
+    }
   
     const usernameInput = loginModal.querySelector(LOGIN_SELECTORS.LOGIN_USERID);
     const passwordInput = loginModal.querySelector(LOGIN_SELECTORS.LOGIN_PASSWORD);
+    
+    if (!usernameInput || !passwordInput) {
+      logger.error('Username or password input field not found');
+      return;
+    }
+    
     await simulateTyping(usernameInput, username);
     await simulateTyping(passwordInput, password);
     if(username && password){
       await fillLoginCaptcha();
       const signInButton = loginModal.querySelector('button[type="submit"]');
-      await signInButton.click();
+      if (signInButton) {
+        await signInButton.click();
+      } else {
+        logger.error('Sign in button not found');
+      }
     }
   }
 

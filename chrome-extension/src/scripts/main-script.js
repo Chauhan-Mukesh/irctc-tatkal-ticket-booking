@@ -25,16 +25,32 @@ async function executeFunctions() {
     await waitForElementToAppear(APP_HEADER);
 
     // Login Page < Page 0 >
-    await login();
-    await waitForAppLoginToDisappear();
-    await callSearchTrainComponent();
-    waitForTargetTime();
+    try {
+      await login();
+      await waitForAppLoginToDisappear();
+    } catch (error) {
+      logger.error("Login failed:", error);
+      throw error;
+    }
+    
+    try {
+      await callSearchTrainComponent();
+      waitForTargetTime();
+    } catch (error) {
+      logger.error("Search train component failed:", error);
+      throw error;
+    }
 
     // Wait for train list page to load
     await waitForElementToAppear(TRAIN_LIST_COMPONENT);
 
     // Select train and accommodation class < Page 1 >
-    await bookTicket();
+    try {
+      await bookTicket();
+    } catch (error) {
+      logger.error("Book ticket failed:", error);
+      throw error;
+    }
 
     if (autoProcessPopup) {
       closePopupToProceed();
@@ -44,32 +60,48 @@ async function executeFunctions() {
     await waitForElementToAppear(PASSENGER_APP_COMPONENT);
 
     // Passenger Input and Payment Type < Page 2 >
-    await addPassengerInputAndContinue();
+    try {
+      await addPassengerInputAndContinue();
+    } catch (error) {
+      logger.error("Add passenger input failed:", error);
+      throw error;
+    }
 
     // Wait for the ticket review and Captcha page load
     await waitForElementToAppear(REVIEW_COMPONENT);
 
     // Review and Captcha < Page 3 >
-    await handleCaptchaAndContinue();
+    try {
+      await handleCaptchaAndContinue();
+    } catch (error) {
+      logger.error("Handle captcha failed:", error);
+      throw error;
+    }
 
     // Wait for the payment page to load
     await waitForElementToAppear(PAYMENT_COMPONENT);
 
     // Payment Selection < Page 4 >
-    await selectPaymentMethod();
-    await selectPaymentProvider();
+    try {
+      await selectPaymentMethod();
+      await selectPaymentProvider();
 
-    if (autoPay) {
-      await clickPayButton();
+      if (autoPay) {
+        await clickPayButton();
 
-      // Payment Confirmation for Ewallet < Page 5 >
-      if (paymentMethod === EWALLET_IRCTC_DEFAULT) {
-        await waitForElementToAppear(EWALLET_COMPONENT);
-        await clickEwalletConfirmButton();
+        // Payment Confirmation for Ewallet < Page 5 >
+        if (paymentMethod === EWALLET_IRCTC_DEFAULT) {
+          await waitForElementToAppear(EWALLET_COMPONENT);
+          await clickEwalletConfirmButton();
+        }
       }
+    } catch (error) {
+      logger.error("Payment selection failed:", error);
+      throw error;
     }
   } catch (error) {
     logger.error("An error occurred during execution:", error);
+    alert("Automation failed: " + error.message + ". Please check console for details.");
   }
 }
 

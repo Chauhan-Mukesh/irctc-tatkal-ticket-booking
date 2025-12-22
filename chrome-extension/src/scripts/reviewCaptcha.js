@@ -1,21 +1,25 @@
 import { REVIEW_SELECTORS } from './domSelectors';
 import { delay, simulateTyping, waitForElementToAppear } from './utils';
 import { scrollToElement } from './elementUtils';
+import logger from './logger';
 
 async function handleCaptchaAndContinue() {
     await waitForElementToAppear(REVIEW_SELECTORS.REVIEW_CAPTCHA_IMAGE);
-    // Find the captcha input element
-    var captchaInput = document.getElementById(REVIEW_SELECTORS.REVIEW_CAPTCHA_INPUT);
+    // Find the captcha input element - try multiple selectors
+    var captchaInput = document.getElementById(REVIEW_SELECTORS.REVIEW_CAPTCHA_INPUT) || 
+                      document.querySelector(REVIEW_SELECTORS.REVIEW_CAPTCHA_INPUT);
   
     // Scroll the captcha input field into view smoothly
     if (captchaInput) {
       await scrollToElement(captchaInput);
+    } else {
+      logger.warn('Captcha input field not found');
     }
-    delay(100);
+    await delay(100);
     // Prompt the user to enter the captcha value
     var trainHeader = document.querySelector(REVIEW_SELECTORS.REVIEW_TRAIN_HEADER);
-    var available = trainHeader.querySelector(REVIEW_SELECTORS.REVIEW_AVAILABLE);
-    var waitingList = trainHeader.querySelector(REVIEW_SELECTORS.REVIEW_WAITING);
+    var available = trainHeader?.querySelector(REVIEW_SELECTORS.REVIEW_AVAILABLE);
+    var waitingList = trainHeader?.querySelector(REVIEW_SELECTORS.REVIEW_WAITING);
     var seatsAvailable = (available || waitingList)?.textContent;
     var captchaValue = prompt(
       'Current Seats Status: ' + seatsAvailable + '\nPlease enter the Captcha:'
@@ -33,6 +37,8 @@ async function handleCaptchaAndContinue() {
     // Click the "Continue" button
     if (continueButton) {
       await continueButton.click();
+    } else {
+      logger.warn('Continue button not found');
     }
   }
 
