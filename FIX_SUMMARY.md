@@ -6,10 +6,10 @@
 **Problem**: IRCTC website structure changed, causing the automation to fail to find elements.
 
 **Solution**: 
-- Updated all DOM selectors in `domSelectors.js` with fallback options
-- Login elements now support both modal and direct form layouts
-- Train search supports new Angular component structure
-- Added multiple selector options for each critical element
+- Added Angular component-specific fallback selectors (p-autocomplete, p-dropdown, p-calendar)
+- **Clarified after user feedback**: Login is a modal (`app-login`), train selection is a page (`app-train-list`)
+- Removed overly generic fallback selectors that could match wrong elements
+- Kept targeted Angular component fallbacks for form inputs
 
 **Files Modified**:
 - `chrome-extension/src/scripts/domSelectors.js`

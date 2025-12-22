@@ -3,6 +3,13 @@
 ## Overview
 This document describes the changes made to fix the IRCTC Tatkal ticket booking automation after the IRCTC website updated its structure.
 
+## Important Clarification
+After user feedback, it was clarified that:
+- **Login is a MODAL**: The `app-login` component appears as a modal dialog when clicking the login button. It is NOT a page-level component.
+- **Train selection is a PAGE**: The `app-train-list` component is a dedicated page that loads after searching for trains. It is NOT a modal.
+
+Initial assumptions about adding generic fallback selectors were incorrect and have been reverted. The focus is now on adding Angular component-specific fallbacks (like `p-autocomplete`, `p-dropdown`, `p-calendar`) rather than generic class selectors.
+
 ## DOM Selector Updates
 
 ### 1. Login Elements
@@ -11,29 +18,41 @@ This document describes the changes made to fix the IRCTC Tatkal ticket booking 
 - Login component: `app-login`
 - Username input: `input[formcontrolname="userid"]`
 
-**Updated Selectors (with fallbacks):**
-- Login button: `app-header a.loginText, button.search_btn.train_Search`
-- Login component: `app-login, app-jp-input`
-- Username input: `input[formcontrolname="userid"], input[formcontrolname="userName"]`
-- Captcha input: Multiple selectors including `#captcha`, `input[formcontrolname="captcha"]`
+**Current Selectors:**
+- Login button: `app-header a.loginText` (unchanged - still works)
+- Login component: `app-login` (unchanged - it's a modal, not a page)
+- Username input: `input[formcontrolname="userid"]` (unchanged)
+- Captcha input: `app-captcha #captcha` (unchanged)
+
+**Note**: Login is a modal component that appears when clicking the login button. The initial assumption of adding page-level fallbacks was incorrect and has been reverted.
 
 ### 2. Journey Search Elements
 **Key Changes:**
-- Journey input component now includes `.level_1_1.col-xs-12.remove-padding.jp-form`
-- Station autocomplete supports both old and new Angular structures
-- Added fallback selectors for autocomplete dropdown lists
+- Added Angular component fallback selectors for form inputs:
+  - `p-autocomplete[formcontrolname="origin"] input` for origin station
+  - `p-autocomplete[formcontrolname="destination"] input` for destination
+  - `p-dropdown[formcontrolname="journeyQuota"]` for quota selection
+  - `p-calendar[formcontrolname="journeyDate"]` for date picker
+- Added `.ui-autocomplete-panel li` as fallback for autocomplete dropdown
+- Journey input component remains `app-jp-input` (no generic fallbacks)
 
 ### 3. Train List Elements
-**Key Changes:**
-- Train list component expanded to include `.col-sm-9.col-xs-12`
-- Train heading now includes `.train-heading strong` selector
-- Better handling of refresh links with multiple selectors
+**Current Selectors:**
+- Train list component: `app-train-list` (unchanged - it's a proper page component)
+- Train component: `app-train-avl-enq` (unchanged)
+- Find train number: `app-train-avl-enq .train-heading` (unchanged)
+- Other selectors remain unchanged
+
+**Note**: Train selection is a dedicated page with proper Angular components. Generic class fallbacks were removed as they could match elements on wrong pages.
 
 ### 4. Review and Captcha Elements
-**Key Changes:**
-- Captcha input now tries multiple ID and form control selectors
-- Better detection of captcha image elements
-- Multiple submit button selectors for compatibility
+**Current Selectors:**
+- Review component: `app-review-booking` (unchanged)
+- Captcha image: `app-captcha .captcha-img` (unchanged)
+- Captcha input: `captcha` (unchanged)
+- Submit button: `app-review-booking button.btnDefault.train_Search` (unchanged)
+
+**Note**: Original selectors work correctly. Overly generic fallbacks were removed to prevent matching wrong elements.
 
 ## NPM Package Updates
 
